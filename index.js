@@ -7,8 +7,6 @@ const port = 3000;
 
 app.use('/api/v1/pokemon', pokemonRouter)
 
-
-
 app.listen(port, () => {
   console.log(`Starting express application on port ${port}`);
 });
