@@ -1,11 +1,19 @@
+import PokemonCoordinator from '../coordinators/pokemon.coordinator.js';
+
 export const getPokemon = async (req, res, next) => {
     console.log('Controller: getPokemon()');
-    res.status(200).json([])
+
+    const result = PokemonCoordinator.getPokemon();
+
+    res.status(200).json(result);
 };
 
 export const createPokemon = async (req, res, next) => {
     console.log('Controller: createPokemon()');
-    res.status(200).json({})
+
+    const result = PokemonCoordinator.createPokemon();
+
+    res.status(200).json(result)
 };
 
 export const getPokemonID = async (req, res, next) => {
