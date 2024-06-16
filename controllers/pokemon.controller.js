@@ -18,7 +18,10 @@ export const createPokemon = async (req, res, next) => {
 
 export const getPokemonID = async (req, res, next) => {
   console.log(`Controller: getPokemonID(${req.params.id})`);
-  res.status(200).json([]);
+
+  const result = PokemonCoordinator.getPokemonID(req.params.id);
+
+  res.status(200).json(result);
 };
 
 export const replacePokemonID = async (req, res, next) => {

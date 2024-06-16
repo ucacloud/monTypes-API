@@ -2,7 +2,7 @@
 
 const pokemon = [
   {
-    id: 1,
+    id: '1',
     name: 'Bulbasaur',
     type: 'Grass|Poison',
   },
@@ -18,5 +18,12 @@ export default class PokemonModel {
     console.log('\t\t Model: getPokemon()');
     pokemon.push(newPokemon);
     return newPokemon;
+  };
+
+  static getPokemonID = (id) => {
+    console.log('\t\t Model: getPokemonID()');
+    const pokemons = pokemon.find((p) => (p.id === id));
+
+    return pokemons;
   };
 }

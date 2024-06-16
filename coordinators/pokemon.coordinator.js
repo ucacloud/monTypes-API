@@ -18,4 +18,10 @@ export default class PokemonCoordinator {
 
     return PokemonModel.createPokemon(pokemon);
   };
+
+  static getPokemonID = (id) => {
+    console.log('\t Coordinator: getPokemonID()');
+
+    return PokemonModel.getPokemonID(id);
+  };
 }
