@@ -1,5 +1,12 @@
 import express from 'express';
-import { getPokemon, createPokemon, getPokemonID, replacePokemonID, deletePokemonID, updatePokemonID } from '../controllers/pokemon.controller.js';
+import {
+  getPokemon,
+  createPokemon,
+  getPokemonID,
+  replacePokemonID,
+  deletePokemonID,
+  updatePokemonID,
+} from '../controllers/pokemon.controller.js';
 
 const pokemonRouter = express.Router();
 

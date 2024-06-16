@@ -4,17 +4,19 @@ const pokemon = [
   {
     id: 1,
     name: 'Bulbasaur',
-    type: 'Grass|Poison'
-  }
+    type: 'Grass|Poison',
+  },
 ];
 
 export default class PokemonModel {
   static getPokemon = () => {
-      return pokemon;
-  }
+    console.log('\t\t Model: getPokemon()');
+    return pokemon;
+  };
 
   static createPokemon = (newPokemon) => {
-    pokemon.push(newPokemon)
+    console.log('\t\t Model: getPokemon()');
+    pokemon.push(newPokemon);
     return newPokemon;
-  }
+  };
 }
