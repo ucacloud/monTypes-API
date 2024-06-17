@@ -30,8 +30,24 @@ export default class PokemonModel {
   static deletePokemonID = (id) => {
     console.log('\t\t Model: deletePokemonID()');
 
+    const pokemonCountBeforeDelete = pokemon.length;
     pokemon = pokemon.filter((p) => (p.id !== id));
 
+    if (pokemonCountBeforeDelete === pokemon.length) {
+      return false;
+    }
+
     return true;
+  };
+
+  static replacePokemonID = (id, pokemons) => {
+    const pokemonIndex = pokemon.findIndex((p) => (p.id === id));
+
+    if (pokemonIndex > -1) {
+      pokemon.splice(pokemonIndex, 1, pokemon);
+      return pokemons;
+    }
+
+    return false;
   };
 }

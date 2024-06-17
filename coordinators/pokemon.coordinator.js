@@ -30,4 +30,13 @@ export default class PokemonCoordinator {
 
     return PokemonModel.deletePokemonID(id);
   };
+
+  static replacePokemonID = (id, pokemon) => {
+    console.log('\t Coordinator: replacePokemonID()');
+    const replacePokemonID = {
+      ...pokemon,
+      id,
+    };
+    return PokemonModel.replacePokemonID(id, replacePokemonID);
+  };
 }

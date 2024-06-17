@@ -13,7 +13,7 @@ export const createPokemon = async (req, res, next) => {
 
   const result = PokemonCoordinator.createPokemon(req.body);
 
-  res.status(200).json(result);
+  res.status(201).json(result);
 };
 
 export const getPokemonID = async (req, res, next) => {
@@ -32,12 +32,23 @@ export const deletePokemonID = async (req, res, next) => {
 
   const result = PokemonCoordinator.deletePokemonID(req.params.id);
 
-  res.status(200).json(result);
+  if (result) {
+    res.status(204).json();
+  } else {
+    res.status(404).json();
+  }
 };
 
 export const replacePokemonID = async (req, res, next) => {
   console.log(`Controller: replacePokemonID(${req.params.id})`);
-  res.status(200).json([]);
+
+  const result = PokemonCoordinator.replacePokemonID(req.params.id, req.body);
+
+  if (result) {
+    res.status(200).json(result);
+  } else {
+    res.status(404).json();
+  }
 };
 
 export const updatePokemonID = async (req, res, next) => {
