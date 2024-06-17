@@ -1,6 +1,6 @@
 // All database interactions are handeled here
 
-const pokemon = [
+let pokemon = [
   {
     id: '1',
     name: 'Bulbasaur',
@@ -25,5 +25,13 @@ export default class PokemonModel {
     const pokemons = pokemon.find((p) => (p.id === id));
 
     return pokemons;
+  };
+
+  static deletePokemonID = (id) => {
+    console.log('\t\t Model: deletePokemonID()');
+
+    pokemon = pokemon.filter((p) => (p.id !== id));
+
+    return true;
   };
 }

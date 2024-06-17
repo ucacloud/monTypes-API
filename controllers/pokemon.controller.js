@@ -20,17 +20,23 @@ export const getPokemonID = async (req, res, next) => {
   console.log(`Controller: getPokemonID(${req.params.id})`);
 
   const result = PokemonCoordinator.getPokemonID(req.params.id);
+  if (result) {
+    res.status(200).json(result);
+  } else {
+    res.status(404).json();
+  }
+};
+
+export const deletePokemonID = async (req, res, next) => {
+  console.log(`Controller: deletePokemonID(${req.params.id})`);
+
+  const result = PokemonCoordinator.deletePokemonID(req.params.id);
 
   res.status(200).json(result);
 };
 
 export const replacePokemonID = async (req, res, next) => {
   console.log(`Controller: replacePokemonID(${req.params.id})`);
-  res.status(200).json([]);
-};
-
-export const deletePokemonID = async (req, res, next) => {
-  console.log(`Controller: deletePokemonID(${req.params.id})`);
   res.status(200).json([]);
 };
 

@@ -24,4 +24,10 @@ export default class PokemonCoordinator {
 
     return PokemonModel.getPokemonID(id);
   };
+
+  static deletePokemonID = (id) => {
+    console.log('\t Coordinator: deletePokemonID()');
+
+    return PokemonModel.deletePokemonID(id);
+  };
 }
