@@ -39,10 +39,10 @@ export const deletePokemonID = async (req, res, next) => {
   }
 };
 
-export const replacePokemonID = async (req, res, next) => {
-  console.log(`Controller: replacePokemonID(${req.params.id})`);
+export const replacePokemon = async (req, res, next) => {
+  console.log(`Controller: replacePokemon(${req.params.id})`);
 
-  const result = PokemonCoordinator.replacePokemonID(req.params.id, req.body);
+  const result = PokemonCoordinator.replacePokemon(req.params.id, req.body);
 
   if (result) {
     res.status(200).json(result);
@@ -51,7 +51,14 @@ export const replacePokemonID = async (req, res, next) => {
   }
 };
 
-export const updatePokemonID = async (req, res, next) => {
-  console.log(`Controller: updatePokemonID(${req.params.id})`);
-  res.status(200).json([]);
+export const updatePokemon = async (req, res, next) => {
+  console.log(`Controller: updatePokemon(${req.params.id})`);
+
+  const result = PokemonCoordinator.updatePokemon(req.params.id, req.body);
+
+  if (result) {
+    res.status(200).json(result);
+  } else {
+    res.status(404).json();
+  }
 };

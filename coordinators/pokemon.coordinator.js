@@ -31,12 +31,17 @@ export default class PokemonCoordinator {
     return PokemonModel.deletePokemonID(id);
   };
 
-  static replacePokemonID = (id, pokemon) => {
-    console.log('\t Coordinator: replacePokemonID()');
-    const replacePokemonID = {
+  static replacePokemon = (id, pokemon) => {
+    console.log('\t Coordinator: replacePokemon()');
+    const replacePokemon = {
       ...pokemon,
       id,
     };
-    return PokemonModel.replacePokemonID(id, replacePokemonID);
+    return PokemonModel.replacePokemon(id, replacePokemon);
+  };
+
+  static updatePokemon = (id, pokemon) => {
+    console.log('\t Coordinator: updatePokemon()');
+    return PokemonModel.updatePokemon(id, pokemon);
   };
 }

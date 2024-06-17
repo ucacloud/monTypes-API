@@ -40,12 +40,29 @@ export default class PokemonModel {
     return true;
   };
 
-  static replacePokemonID = (id, pokemons) => {
+  static replacePokemon = (id, pokemons) => {
     const pokemonIndex = pokemon.findIndex((p) => (p.id === id));
 
     if (pokemonIndex > -1) {
       pokemon.splice(pokemonIndex, 1, pokemon);
       return pokemons;
+    }
+
+    return false;
+  };
+
+  static updatePokemon = (id, pokemons) => {
+    const pokemonIndex = pokemon.findIndex((p) => (p.id === id));
+
+    if (pokemonIndex > -1) {
+      Object.keys(pokemons).forEach((key) => {
+        if (key === 'id') {
+          return;
+        }
+        pokemon[pokemonIndex][key] = pokemons[key];
+      });
+
+      return pokemon[pokemonIndex];
     }
 
     return false;
