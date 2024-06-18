@@ -2,6 +2,7 @@
 
 import { db } from '../lib/database.js';
 import Constants from '../lib/constants.js';
+import { ReturnDocument } from 'mongodb';
 
 let pokemon = [
   {
@@ -16,58 +17,63 @@ export default class PokemonModel {
     console.log('\t\t Model: getPokemon()');
     // return pokemon;
 
-    return db.getDb().collection(Constants.POKEMON_COLLECTION).find({}).toArray();
+    return db
+      .dbPokemon()
+      .find({}, { projection: Constants.DEFAULT_PROJECTION })
+      .toArray();
   };
 
-  static createPokemon = (newPokemon) => {
+  static createPokemon = async (newPokemon) => {
     console.log('\t\t Model: getPokemon()');
-    pokemon.push(newPokemon);
-    return newPokemon;
+
+    await db.dbPokemon().insertOne(newPokemon);
+
+    const returnPokemon = { ...newPokemon };
+    // eslint-disable-next-line no-underscore-dangle
+    delete returnPokemon._id;
+    return returnPokemon;
   };
 
   static getPokemonID = (id) => {
     console.log('\t\t Model: getPokemonID()');
-    const pokemons = pokemon.find((p) => (p.id === id));
-
-    return pokemons;
+    return db
+      .dbPokemon()
+      .findOne({ id }, { projection: Constants.DEFAULT_PROJECTION });
   };
 
   static deletePokemonID = (id) => {
     console.log('\t\t Model: deletePokemonID()');
 
-    const pokemonCountBeforeDelete = pokemon.length;
-    pokemon = pokemon.filter((p) => (p.id !== id));
-
-    if (pokemonCountBeforeDelete === pokemon.length) {
-      return false;
-    }
-
-    return true;
+    return db.dbPokemon().deleteOne({ id });
   };
 
-  static replacePokemon = (id, pokemons) => {
-    const pokemonIndex = pokemon.findIndex((p) => (p.id === id));
+  static replacePokemon = async (id, pokemons) => {
+    const result = await db.dbPokemon().replaceOne({ id }, pokemons);
 
-    if (pokemonIndex > -1) {
-      pokemon.splice(pokemonIndex, 1, pokemon);
+    if (result.matchedCount === 1) {
       return pokemons;
     }
 
     return false;
   };
 
-  static updatePokemon = (id, pokemons) => {
-    const pokemonIndex = pokemon.findIndex((p) => (p.id === id));
+  static updatePokemon = async (id, pokemons) => {
+    const update = {
+      $set: {},
+    };
 
-    if (pokemonIndex > -1) {
-      Object.keys(pokemons).forEach((key) => {
-        if (key === 'id') {
-          return;
-        }
-        pokemon[pokemonIndex][key] = pokemons[key];
-      });
+    Object.keys(pokemons).forEach((key) => {
+      if (key === 'id') {
+        return;
+      }
+      update.$set[key] = pokemons[key];
+    });
 
-      return pokemon[pokemonIndex];
+    const result = await db.dbPokemon().findOneAndUpdate({ id }, update, { ReturnDocument: 'after' });
+
+    if (result) {
+      delete result._id
+      return result;
     }
 
     return false;
