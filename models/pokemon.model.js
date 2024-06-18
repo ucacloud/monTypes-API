@@ -1,5 +1,8 @@
 // All database interactions are handeled here
 
+import { db } from '../lib/database.js';
+import Constants from '../lib/constants.js';
+
 let pokemon = [
   {
     id: '1',
@@ -9,9 +12,11 @@ let pokemon = [
 ];
 
 export default class PokemonModel {
-  static getPokemon = () => {
+  static getPokemon = async () => {
     console.log('\t\t Model: getPokemon()');
-    return pokemon;
+    // return pokemon;
+
+    return db.getDb().collection(Constants.POKEMON_COLLECTION).find({}).toArray();
   };
 
   static createPokemon = (newPokemon) => {

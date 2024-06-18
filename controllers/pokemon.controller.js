@@ -3,7 +3,7 @@ import PokemonCoordinator from '../coordinators/pokemon.coordinator.js';
 export const getPokemon = async (req, res, next) => {
   console.log('Controller: getPokemon()');
 
-  const result = PokemonCoordinator.getPokemon();
+  const result = await PokemonCoordinator.getPokemon();
 
   res.status(200).json(result);
 };
