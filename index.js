@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { db } from './lib/database.js';
 import pokemonRouter from './routes/pokemon.routes.js';
+import config from 'config';
 
 const { json } = bodyParser;
 
@@ -12,14 +13,10 @@ app.use(json());
 
 app.use('/api/v1/pokemon', pokemonRouter);
 
-const config = {
-  url: 'mongodb://127.0.0.1:27017',
-  database: 'montypes',
-  minPoolSize: 3,
-  maxPoolSize: 10,
-};
-
-db.init(config);
+/* export NODE_ENV=myhost */
+const mongoConfig = config.get('mongo');
+console.log(mongoConfig);
+db.init(mongoConfig);
 
 app.listen(port, () => {
   console.log(`Starting express application on port ${port} @ ${new Date().toISOString()}`);
