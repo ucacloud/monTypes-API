@@ -1,0 +1,8 @@
+{
+  "mongo": {
+    "url": "mongodb+srv://mgcnlrar:aR!83GT$z4w!mKP@arca2024.milmt9j.mongodb.net/?retryWrites=true&w=majority&appName=ARCA2024",
+    "database": "montypes",
+    "minPoolSize": 1,
+    "maxPoolSize": 2
+  }
+}
