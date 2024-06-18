@@ -15,6 +15,8 @@ app.use('/api/v1/pokemon', pokemonRouter);
 const config = {
   url: 'mongodb://127.0.0.1:27017',
   database: 'montypes',
+  minPoolSize: 3,
+  maxPoolSize: 10,
 };
 
 db.init(config);
