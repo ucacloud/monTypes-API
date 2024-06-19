@@ -69,10 +69,12 @@ export default class PokemonModel {
       update.$set[key] = pokemons[key];
     });
 
-    const result = await db.dbPokemon().findOneAndUpdate({ id }, update, { ReturnDocument: 'after' });
+    const result = await db
+      .dbPokemon()
+      .findOneAndUpdate({ id }, update, { ReturnDocument: 'after' });
 
     if (result) {
-      delete result._id
+      delete result._id;
       return result;
     }
 
