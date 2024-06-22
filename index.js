@@ -11,6 +11,8 @@ const app = express();
 const port = 3000;
 app.use(json());
 
+app.use(express.static('./static'));
+
 app.use('/api/v1/pokemon', pokemonRouter);
 
 /* export NODE_ENV=myhost */
@@ -19,5 +21,7 @@ console.log(mongoConfig);
 db.init(mongoConfig);
 
 app.listen(port, () => {
-  console.log(`Starting express application on port ${port} @ ${new Date().toISOString()}`);
+  console.log(
+    `Starting express application on port ${port} @ ${new Date().toISOString()}`
+  );
 });
