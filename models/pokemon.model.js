@@ -13,13 +13,13 @@ let pokemon = [
 ];
 
 export default class PokemonModel {
-  static getPokemon = async () => {
+  static getPokemon = async (sortDirection) => {
     console.log('\t\t Model: getPokemon()');
     // return pokemon;
 
-    return db
-      .dbPokemon()
-      .find({}, { projection: Constants.DEFAULT_PROJECTION })
+    return db.dbPokemon().find({}, {
+      sort: { id: sortDirection },
+      projection: Constants.DEFAULT_PROJECTION })
       .toArray();
   };
 

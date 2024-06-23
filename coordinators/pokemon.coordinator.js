@@ -2,10 +2,10 @@ import PokemonModel from '../models/pokemon.model.js';
 import { v4 as uuid } from 'uuid';
 
 export default class PokemonCoordinator {
-  static getPokemon = () => {
+  static getPokemon = (sortDirection) => {
     console.log('\t Coordinator: getPokemon()');
 
-    return PokemonModel.getPokemon();
+    return PokemonModel.getPokemon(sortDirection);
   };
 
   static createPokemon = (newPokemon) => {

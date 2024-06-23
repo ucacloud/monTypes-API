@@ -2,9 +2,10 @@ import PokemonCoordinator from '../coordinators/pokemon.coordinator.js';
 
 export const getPokemon = async (req, res, next) => {
   console.log('Controller: getPokemon()');
+  const sortDirection = req.query?.sortDirection?.toLowercase()  === 'desc' ? 1 : -1;
 
   try {
-    const result = await PokemonCoordinator.getPokemon();
+    const result = await PokemonCoordinator.getPokemon(sortDirection);
     res.status(200).json(result);
   } catch (ex) {
     next(ex);
