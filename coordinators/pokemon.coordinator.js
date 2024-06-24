@@ -1,11 +1,11 @@
 import PokemonModel from '../models/pokemon.model.js';
-import { v4 as uuid } from 'uuid';
+import { nanoid } from 'nanoid';
 
 export default class PokemonCoordinator {
-  static getPokemon = (sortDirection) => {
+  static getPokemon = () => {
     console.log('\t Coordinator: getPokemon()');
 
-    return PokemonModel.getPokemon(sortDirection);
+    return PokemonModel.getPokemon();
   };
 
   static createPokemon = (newPokemon) => {
@@ -13,7 +13,7 @@ export default class PokemonCoordinator {
 
     const pokemon = {
       ...newPokemon,
-      id: uuid(),
+      id: nanoid(5),
     };
 
     return PokemonModel.createPokemon(pokemon);
