@@ -1,15 +1,22 @@
 import PokemonModel from '../models/pokemon.model.js';
 import { nanoid } from 'nanoid';
+import logger from '../lib/logger.js';
 
 export default class PokemonCoordinator {
   static getPokemon = () => {
-    console.log('\t Coordinator: getPokemon()');
+    logger.debug('getWidgets', {
+      location: 'coordinator',
+      function: 'getWidgets',
+    });
 
     return PokemonModel.getPokemon();
   };
 
   static createPokemon = (newPokemon) => {
-    console.log('\t Coordinator: createPokemon()');
+    logger.debug({
+      location: 'coordinator',
+      function: 'createWidget',
+    });
 
     const pokemon = {
       ...newPokemon,
@@ -20,19 +27,32 @@ export default class PokemonCoordinator {
   };
 
   static getPokemonID = (id) => {
-    console.log('\t Coordinator: getPokemonID()');
+    logger.debug({
+      location: 'coordinator',
+      function: 'getWidget',
+      id,
+    });
 
     return PokemonModel.getPokemonID(id);
   };
 
   static deletePokemonID = (id) => {
-    console.log('\t Coordinator: deletePokemonID()');
+    logger.info({
+      location: 'coordinator',
+      function: 'deleteWidget',
+      id,
+    });
 
     return PokemonModel.deletePokemonID(id);
   };
 
   static replacePokemon = (id, pokemon) => {
-    console.log('\t Coordinator: replacePokemon()');
+    logger.debug({
+      location: 'coordinator',
+      function: 'replaceWidget',
+      id,
+    });
+    
     const replacePokemon = {
       ...pokemon,
       id,
@@ -41,7 +61,11 @@ export default class PokemonCoordinator {
   };
 
   static updatePokemon = (id, pokemon) => {
-    console.log('\t Coordinator: updatePokemon()');
+    logger.debug({
+      location: 'coordinator',
+      function: 'updateWidget',
+      id,
+    });
     return PokemonModel.updatePokemon(id, pokemon);
   };
 }

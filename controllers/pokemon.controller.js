@@ -1,7 +1,12 @@
 import PokemonCoordinator from '../coordinators/pokemon.coordinator.js';
+import logger from '../lib/logger.js'
 
 export const getPokemon = async (req, res, next) => {
-  console.log('Controller: getPokemon()');
+  logger.info('Calling controller.getWidgets', {
+    location: 'controller',
+    function: 'getWidgets',
+    method: 'GET',
+  });
 
   try {
     const result = await PokemonCoordinator.getPokemon();
@@ -12,7 +17,11 @@ export const getPokemon = async (req, res, next) => {
 };
 
 export const createPokemon = async (req, res, next) => {
-  console.log('Controller: createPokemon()');
+  logger.info({
+    location: 'controller',
+    function: 'createWidget',
+    method: 'POST',
+  });
 
   try {
     const result = await PokemonCoordinator.createPokemon(req.body);
@@ -23,7 +32,12 @@ export const createPokemon = async (req, res, next) => {
 };
 
 export const getPokemonID = async (req, res, next) => {
-  console.log(`Controller: getPokemonID(${req.params.id})`);
+  logger.info({
+    location: 'controller',
+    function: 'getWidget',
+    method: 'GET',
+    id: req.params.id,
+  });
 
   try {
     const result = await PokemonCoordinator.getPokemonID(req.params.id);
@@ -38,7 +52,12 @@ export const getPokemonID = async (req, res, next) => {
 };
 
 export const deletePokemonID = async (req, res, next) => {
-  console.log(`Controller: deletePokemonID(${req.params.id})`);
+  logger.info({
+    location: 'controller',
+    function: 'deleteWidget',
+    method: 'DELETE',
+    id: req.params.id,
+  });
 
   try {
     await PokemonCoordinator.deletePokemonID(req.params.id);
@@ -49,7 +68,12 @@ export const deletePokemonID = async (req, res, next) => {
 };
 
 export const replacePokemon = async (req, res, next) => {
-  console.log(`Controller: replacePokemon(${req.params.id})`);
+  logger.info({
+    location: 'controller',
+    function: 'replaceWidget',
+    method: 'PUT',
+    id: req.params.id,
+  });
 
   try {
     const result = await PokemonCoordinator.replacePokemon(req.params.id, req.body);
@@ -65,7 +89,12 @@ export const replacePokemon = async (req, res, next) => {
 };
 
 export const updatePokemon = async (req, res, next) => {
-  console.log(`Controller: updatePokemon(${req.params.id})`);
+  logger.info({
+    location: 'controller',
+    function: 'updateWidget',
+    method: 'PATCH',
+    id: req.params.id,
+  });
 
   const result = await PokemonCoordinator.updatePokemon(req.params.id, req.body);
 

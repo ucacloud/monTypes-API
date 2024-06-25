@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import { db } from './lib/database.js';
+import authMiddleware from './middleware/auth.js'
 import pokemonRouter from './routes/pokemon.routes.js';
 import config from 'config';
 
@@ -9,6 +10,9 @@ const { json } = bodyParser;
 // This is my express application
 const app = express();
 const port = 3000;
+
+// app.use(authMiddleware())
+
 app.use(json());
 
 app.use(express.static('./static'));

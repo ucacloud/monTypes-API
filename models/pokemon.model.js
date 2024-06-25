@@ -3,18 +3,14 @@
 import { db } from '../lib/database.js';
 import Constants from '../lib/constants.js';
 import { ReturnDocument } from 'mongodb';
-
-let pokemon = [
-  {
-    id: '1',
-    name: 'Bulbasaur',
-    type: 'Grass|Poison',
-  },
-];
+import logger from '../lib/logger.js';
 
 export default class PokemonModel {
   static getPokemon = async () => {
-    console.log('\t\t Model: getPokemon()');
+    logger.debug('getWidgets', {
+      location: 'model',
+      function: 'getWidgets',
+    });
     // return pokemon;
 
     return db.dbPokemon().find({}, {
@@ -23,7 +19,10 @@ export default class PokemonModel {
   };
 
   static createPokemon = async (newPokemon) => {
-    console.log('\t\t Model: getPokemon()');
+    logger.debug({
+      location: 'model',
+      function: 'createWidget',
+    });
 
     await db.dbPokemon().insertOne(newPokemon);
 
@@ -34,19 +33,32 @@ export default class PokemonModel {
   };
 
   static getPokemonID = (id) => {
-    console.log('\t\t Model: getPokemonID()');
+    logger.debug({
+      location: 'model',
+      function: 'getWidget',
+      id,
+    });
     return db
       .dbPokemon()
       .findOne({ id }, { projection: Constants.DEFAULT_PROJECTION });
   };
 
   static deletePokemonID = (id) => {
-    console.log('\t\t Model: deletePokemonID()');
+    logger.debug({
+      location: 'model',
+      function: 'deleteWidget',
+      id,
+    });
 
     return db.dbPokemon().deleteOne({ id });
   };
 
   static replacePokemon = async (id, pokemons) => {
+    logger.debug({
+      location: 'model',
+      function: 'replaceWidget',
+      id,
+    });
     const result = await db.dbPokemon().replaceOne({ id }, pokemons);
 
     if (result.matchedCount === 1) {
@@ -57,6 +69,11 @@ export default class PokemonModel {
   };
 
   static updatePokemon = async (id, pokemons) => {
+    logger.debug({
+      location: 'model',
+      function: 'updateWidget',
+      id,
+    });
     const update = {
       $set: {},
     };
