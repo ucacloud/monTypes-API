@@ -11,7 +11,7 @@ const { json } = bodyParser;
 const app = express();
 const port = 3000;
 
-// app.use(authMiddleware())
+app.use(authMiddleware())
 
 app.use(json());
 

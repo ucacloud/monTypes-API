@@ -1,6 +1,6 @@
 import ApiKeysCoordinator from '../coordinators/api-key.coordinator.js';
 import { db } from '../lib/database.js';
-
+import logger from '../lib/logger.js';
 
 const middleware = () => async (req, res, next) => {
   if (!req.headers.authorization) {
@@ -14,23 +14,15 @@ const middleware = () => async (req, res, next) => {
   const apiKey = values[0];
   const apiSecret = values[1];
 
-  const dbKey = await ApiKeysCoordinator.getApiKey(apiKey);
+  const dbKey = await ApiKeysCoordinator.getApiKey(apiKey, apiSecret);
 
   if (!dbKey) {
     logger.warn('API Key and/or secret not found!', {
-      apiKey
+      apiKey,
     });
     res.status(401).send();
     return;
   }
-
-  if (apiKey !== validApiKey || apiSecret !== validPaiSecret) {
-    res.status(401).send();
-
-    return;
-  }
-
-  console.log(values);
 
   next();
 };
