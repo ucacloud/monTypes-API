@@ -11,7 +11,8 @@ const { json } = bodyParser;
 const app = express();
 const port = 3000;
 
-app.use(authMiddleware())
+// This will turn on/off the authenticator
+// app.use(authMiddleware())
 
 app.use(json());
 
